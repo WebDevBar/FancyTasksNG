@@ -43,7 +43,7 @@ Rectangle {
     property color themeBgColor: Kirigami.Theme.backgroundColor
     
     // Configurable color for the text-based icon, defaulting to theme logic
-    property color textIconColor: isUrgent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+    property color textIconColor: showBackground ? "white" : Kirigami.Theme.textColor
 
     // Height should be set from outside, width is adaptive
     width: {
@@ -56,12 +56,11 @@ Rectangle {
     antialiasing: true
     // Theme-aware background: uses system background color, but stays red for urgent items
     // When showNumber is false (dot mode), we use highlight color directly for better saturation
-    color: showBackground ? (isUrgent ? Kirigami.Theme.negativeTextColor : (badgeRect.showNumber ? Kirigami.Theme.backgroundColor : Kirigami.Theme.highlightColor)) : "transparent"
-
+    color: showBackground ? Kirigami.Theme.negativeTextColor : "transparent"
     // Bright border using highlight color, but subtle when not urgent
-    border.color: showBackground ? ((isUrgent || !badgeRect.showNumber) ? "transparent" : Kirigami.Theme.highlightColor) : "transparent"
+    border.color: "transparent"
     border.width: 1 // Keep it thin and elegant
-    opacity: isUrgent ? 1 : 0.85
+    opacity: 1
     
     visible: (number > 0) || (iconSource !== "") || (textSource !== "")
 
@@ -84,7 +83,7 @@ Rectangle {
         roundToIconSize: false
 
         // Adaptive icon color: white on red background, theme-aware otherwise
-        color: badgeRect.isUrgent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+        color: badgeRect.showBackground ? "white" : Kirigami.Theme.textColor
         
         // Visual feedback for interaction and mirroring support
         scale: (badgeRect.mirrorText ? -1 : 1) * (badgeRect.hovered ? 1.2 : 1.0)
@@ -237,7 +236,7 @@ Rectangle {
         
         renderType: Text.QtRendering
         antialiasing: true
-        color: badgeRect.isUrgent ? Kirigami.Theme.highlightedTextColor : Kirigami.Theme.textColor
+        color: badgeRect.showBackground ? "white" : Kirigami.Theme.textColor
         visible: badgeRect.number > 0 && badgeRect.showNumber
         
         text: {
