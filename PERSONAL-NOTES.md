@@ -52,3 +52,9 @@ kpackagetool6 --type Plasma/Applet --upgrade package
 # then reload
 systemctl --user restart plasma-plasmashell.service
 ```
+
+
+## Update log
+
+- **2026-07-04** - Checked upstream (`daydve/FancyTasksNG`). Our `webdevbar` branch is current
+  with upstream HEAD (latest tag `v2.0.1`, 0 commits behind). Nothing to pull. No rebuild needed.
